@@ -20,7 +20,7 @@ SlackApi api = new SlackApi("https://hooks.slack.com/services/id_1/id_2/token");
 api.call(new SlackMessage("#general", null, "my message"));
 
 // Send simple message in different room with custom name
-SlackApi api = new SlackApi(https://hooks.slack.com/services/id_1/id_2/token");
+SlackApi api = new SlackApi("https://hooks.slack.com/services/id_1/id_2/token");
 api.call(new SlackMessage("#general", "Mafagafo", "my message"));
 
 ```
