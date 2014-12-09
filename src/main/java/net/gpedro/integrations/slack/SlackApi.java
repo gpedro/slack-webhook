@@ -13,20 +13,16 @@ import com.google.gson.JsonObject;
 
 public class SlackApi {
 
-	private String team;
-	private String token;
+	private String service;
 	
-	public SlackApi(String team, String token) {
-		if(team == null || token == null) {
-			throw new IllegalArgumentException("Missing Team or Token Configuration @ SlackApi");
+	public SlackApi(String service) {
+		if(service == null) {
+			throw new IllegalArgumentException("Missing WebHook URL Configuration @ SlackApi");
+		} else if (!service.startsWith("https://hooks.slack.com/services/")) {
+			throw new IllegalArgumentException("Invalid Service URL. WebHook URL Format: https://hooks.slack.com/services/{id_1}/{id_2}/{token}");
 		}
 		
-		if(token != null && token.length() != 24) {
-			throw new IllegalArgumentException("Token should be 24 characters long @ SlackApi");
-		}
-		
-		this.team  = team;
-		this.token = token;
+		this.service = service;
 	}
 	
 	public void call(SlackMessage message) {
@@ -35,16 +31,12 @@ public class SlackApi {
 		}
 	}
 	
-	private String getService() {
-		return "https://" + team + ".slack.com/services/hooks/incoming-webhook?token=" + token;
-	}
-	
 	private String send(JsonObject message) {
 		URL url;
 	    HttpURLConnection connection = null;  
 	    try {
 	      //Create connection
-	      url = new URL(this.getService());
+	      url = new URL(this.service);
 	      connection = (HttpURLConnection)url.openConnection();
 	      connection.setRequestMethod("POST");
 	      connection.setConnectTimeout(5000);
