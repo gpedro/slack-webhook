@@ -107,8 +107,6 @@ public class SlackAttachment {
 			data.addProperty("color", color);
 		}
 		
-		data.addProperty("mrkdwn_in", "[\"fields\"]");
-		
 		if(fields != null && fields.size() > 0) {
 			data.add("fields", prepareFields());
 		}
