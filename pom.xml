@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>net.gpedro.integrations.slack</groupId>
   <artifactId>slack-webhook</artifactId>
-  <version>1.0.1</version>
+  <version>1.0.2</version>
   
   <dependencies>
 	<dependency>
