@@ -27,7 +27,7 @@ api.call(new SlackMessage("#general", "Mafagafo", "my message"));
 
 # Configuration
 
-1. Go to *<your team>.slack.com/services/new*
+1. Go to *your_team.slack.com/services/new*
 2. Search for *Incoming WebHook* and click in `Add`
 3. Choose Channel to Post and press `Add Incoming WebHooks Integration`
 4. Into *Setup Instructions*, you've a WebHook URL. He is the argument [you must pass the constructor](/src/main/java/net/gpedro/integrations/slack/SlackApi.java#L18). Then, copy it.
