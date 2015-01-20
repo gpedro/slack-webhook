@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>net.gpedro.integrations.slack</groupId>
 	<artifactId>slack-webhook</artifactId>
-	<version>1.0.2</version>
+	<version>1.0.3</version>
 	<name>Slack Webhook integration</name>
 
 	<url>https://github.com/gpedro/slack-webhook</url>
