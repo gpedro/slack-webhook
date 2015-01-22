@@ -25,6 +25,16 @@ api.call(new SlackMessage("#general", "Mafagafo", "my message"));
 
 ```
 
+# Installation
+Add the following dependency in __pom.xml__
+```xml
+<dependency>
+  <groupId>net.gpedro.integrations.slack</groupId>
+  <artifactId>slack-webhook</artifactId>
+  <version>1.0.3</version>
+</dependency>
+```
+
 # Configuration
 
 1. Go to *your_team.slack.com/services/new*
