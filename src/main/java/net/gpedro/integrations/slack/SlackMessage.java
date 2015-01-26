@@ -17,23 +17,25 @@ public class SlackMessage {
 	private String username = null;
 	
 	public SlackMessage() {
-		
 	}
 	
 	public SlackMessage(String text) {
-		this.text = text;
+		this(null, null, text);
 	}
 	
 	public SlackMessage(String username, String text) {
-		this.username = username;
-		this.text = text;
+		this(null, username, text);
 	}
 	
 	public SlackMessage(String channel, String username, String text) {
-		this.channel = channel;
+		if(channel != null) {
+		    this.channel = channel;
+		}
+		
 		if(username != null) {
 			this.username = username;
 		}
+		
 		this.text = text;
 	}
 	
@@ -46,6 +48,10 @@ public class SlackMessage {
 		return this;
 	}
 	
+	/**
+	 * Convert SlackMessage to JSON
+	 * @return JsonObject
+	 */
 	public JsonObject prepare() {
 		if(channel != null) {
 			slackMessage.addProperty("channel", channel);
@@ -107,7 +113,11 @@ public class SlackMessage {
 		return this;
 	}
 	
-	// http://www.emoji-cheat-sheet.com/
+	/**
+	 * See more icons in http://www.emoji-cheat-sheet.com/
+	 * @param icon Avatar
+	 * @return SlackMessage
+	 */
 	public SlackMessage setIcon(String icon) {
 		if(icon != null) {
 			this.icon = icon;

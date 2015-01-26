@@ -25,12 +25,20 @@ public class SlackApi {
 		this.service = service;
 	}
 	
+	/** 
+	 * Prepare Message and Send to request
+	 * @param message
+	 */
 	public void call(SlackMessage message) {
 		if(message != null) {
 			this.send(message.prepare());
 		}
 	}
-	
+	/**
+	 * Send request to WebService
+	 * @param message
+	 * @return String response
+	 */
 	private String send(JsonObject message) {
 		URL url;
 	    HttpURLConnection connection = null;  
