@@ -15,6 +15,9 @@ public class SlackMessage {
 	
 	private String text     = null;
 	private String username = null;
+
+    private boolean unfurlMedia = false;
+    private boolean unfurlLinks = false;
 	
 	public SlackMessage() {
 	}
@@ -68,6 +71,9 @@ public class SlackMessage {
 				slackMessage.addProperty("icon_emoji", icon);
 			}
 		}
+
+        slackMessage.addProperty("unfurl_media", unfurlMedia);
+        slackMessage.addProperty("unfurl_links", unfurlLinks);
 		
 		if(text == null) {
 			throw new IllegalArgumentException("Missing Text field @ SlackMessage");
@@ -141,4 +147,18 @@ public class SlackMessage {
 		
 		return this;
 	}
+
+    public SlackMessage setUnfurlMedia(boolean unfurlMedia) {
+        this.unfurlMedia = unfurlMedia;
+        
+        return this;
+    }
+
+    public SlackMessage setUnfurlLinks(boolean unfurlLinks) {
+        this.unfurlLinks = unfurlLinks;
+        
+        return this;
+    }
+	
+	
 }
