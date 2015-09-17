@@ -108,7 +108,7 @@ public class SlackMessage {
         return attachs;
     }
 
-    public SlackMessage removeAttachment(Integer index) {
+    public SlackMessage removeAttachment(int index) {
         if (this.attach != null) {
             this.attach.remove(index);
         }
@@ -116,7 +116,7 @@ public class SlackMessage {
         return this;
     }
 
-    public SlackMessage setAttachments(ArrayList<SlackAttachment> attach) {
+    public SlackMessage setAttachments(List<SlackAttachment> attach) {
         this.attach = attach;
 
         return this;
