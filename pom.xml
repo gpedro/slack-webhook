@@ -29,6 +29,24 @@
 		</developer>
 	</developers>
 
+	<contributors>
+		<contributor>
+			<name>Christopher Smith</name>
+			<email>chrylis@gmail.com</email>
+			<url>https://github.com/chrylis/</url>
+		</contributor>
+		<contributor>
+			<name>Minecrafter</name>
+			<email>write@imaginarycode.com</email>
+			<url>http://minimum.io</url>
+		</contributor>
+		<contributor>
+			<name>Ben Smith</name>
+			<email>ben@thesmith.co.uk</email>
+			<url>http://thesmith.co.uk</url>
+		</contributor>
+	</contributors>
+
 	<distributionManagement>
 		<snapshotRepository>
 			<id>ossrh</id>
