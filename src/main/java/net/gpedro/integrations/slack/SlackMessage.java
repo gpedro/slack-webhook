@@ -1,13 +1,22 @@
 package net.gpedro.integrations.slack;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class SlackMessage {
 
+    private static final String CHANNEL = "channel";
+    private static final String USERNAME = "username";
+    private static final String HTTP = "http";
+    private static final String ICON_URL = "icon_url";
+    private static final String ICON_EMOJI = "icon_emoji";
+    private static final String UNFURL_MEDIA = "unfurl_media";
+    private static final String UNFURL_LINKS = "unfurl_links";
+    private static final String TEXT = "text";
+    private static final String ATTACHMENTS = "attachments";
     private List<SlackAttachment> attach = null;
     private String channel = null;
     private String icon = null;
@@ -58,33 +67,33 @@ public class SlackMessage {
      */
     public JsonObject prepare() {
         if (channel != null) {
-            slackMessage.addProperty("channel", channel);
+            slackMessage.addProperty(CHANNEL, channel);
         }
 
         if (username != null) {
-            slackMessage.addProperty("username", username);
+            slackMessage.addProperty(USERNAME, username);
         }
 
         if (icon != null) {
-            if (icon.contains("http")) {
-                slackMessage.addProperty("icon_url", icon);
+            if (icon.contains(HTTP)) {
+                slackMessage.addProperty(ICON_URL, icon);
             } else {
-                slackMessage.addProperty("icon_emoji", icon);
+                slackMessage.addProperty(ICON_EMOJI, icon);
             }
         }
 
-        slackMessage.addProperty("unfurl_media", unfurlMedia);
-        slackMessage.addProperty("unfurl_links", unfurlLinks);
+        slackMessage.addProperty(UNFURL_MEDIA, unfurlMedia);
+        slackMessage.addProperty(UNFURL_LINKS, unfurlLinks);
 
         if (text == null) {
             throw new IllegalArgumentException(
                     "Missing Text field @ SlackMessage");
         } else {
-            slackMessage.addProperty("text", text);
+            slackMessage.addProperty(TEXT, text);
         }
 
         if (attach != null && attach.size() > 0) {
-            slackMessage.add("attachments", this.prepareAttach());
+            slackMessage.add(ATTACHMENTS, this.prepareAttach());
         }
 
         return slackMessage;
@@ -99,7 +108,7 @@ public class SlackMessage {
         return attachs;
     }
 
-    public SlackMessage removeAttachment(Integer index) {
+    public SlackMessage removeAttachment(int index) {
         if (this.attach != null) {
             this.attach.remove(index);
         }
@@ -107,7 +116,7 @@ public class SlackMessage {
         return this;
     }
 
-    public SlackMessage setAttachments(ArrayList<SlackAttachment> attach) {
+    public SlackMessage setAttachments(List<SlackAttachment> attach) {
         this.attach = attach;
 
         return this;
@@ -164,4 +173,46 @@ public class SlackMessage {
         return this;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        final SlackMessage that = (SlackMessage) o;
+
+        if (unfurlMedia != that.unfurlMedia) return false;
+        if (unfurlLinks != that.unfurlLinks) return false;
+        if (attach != null ? !attach.equals(that.attach) : that.attach != null) return false;
+        if (channel != null ? !channel.equals(that.channel) : that.channel != null) return false;
+        if (icon != null ? !icon.equals(that.icon) : that.icon != null) return false;
+        if (text != null ? !text.equals(that.text) : that.text != null) return false;
+        return !(username != null ? !username.equals(that.username) : that.username != null);
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = attach != null ? attach.hashCode() : 0;
+        result = 31 * result + (channel != null ? channel.hashCode() : 0);
+        result = 31 * result + (icon != null ? icon.hashCode() : 0);
+        result = 31 * result + (text != null ? text.hashCode() : 0);
+        result = 31 * result + (username != null ? username.hashCode() : 0);
+        result = 31 * result + (unfurlMedia ? 1 : 0);
+        result = 31 * result + (unfurlLinks ? 1 : 0);
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "SlackMessage{" +
+                "attach=" + attach +
+                ", channel='" + channel + '\'' +
+                ", icon='" + icon + '\'' +
+                ", slackMessage=" + slackMessage +
+                ", text='" + text + '\'' +
+                ", username='" + username + '\'' +
+                ", unfurlMedia=" + unfurlMedia +
+                ", unfurlLinks=" + unfurlLinks +
+                '}';
+    }
 }

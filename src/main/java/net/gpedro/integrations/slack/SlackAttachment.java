@@ -1,12 +1,19 @@
 package net.gpedro.integrations.slack;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class SlackAttachment {
+
+    private static final String HEX_REGEX = "^([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$";
+    private static final String FALLBACK = "fallback";
+    private static final String TEXT = "text";
+    private static final String PRETEXT = "pretext";
+    private static final String COLOR = "color";
+    private static final String FIELDS = "fields";
 
     private String fallback;
     private String text;
@@ -25,7 +32,7 @@ public class SlackAttachment {
     }
 
     private boolean isHex(String pair) {
-        return pair.matches("^([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$");
+        return pair.matches(HEX_REGEX);
     }
 
     private JsonArray prepareFields() {
@@ -95,26 +102,61 @@ public class SlackAttachment {
             throw new IllegalArgumentException(
                     "Missing Fallback @ SlackAttachment");
         } else {
-            data.addProperty("fallback", fallback);
+            data.addProperty(FALLBACK, fallback);
         }
 
         if (text != null) {
-            data.addProperty("text", text);
+            data.addProperty(TEXT, text);
         }
 
         if (pretext != null) {
-            data.addProperty("pretext", pretext);
+            data.addProperty(PRETEXT, pretext);
         }
 
         if (color != null) {
-            data.addProperty("color", color);
+            data.addProperty(COLOR, color);
         }
 
         if (fields != null && fields.size() > 0) {
-            data.add("fields", prepareFields());
+            data.add(FIELDS, prepareFields());
         }
 
         return data;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        SlackAttachment that = (SlackAttachment) o;
+
+        if (fallback != null ? !fallback.equals(that.fallback) : that.fallback != null) return false;
+        if (text != null ? !text.equals(that.text) : that.text != null) return false;
+        if (pretext != null ? !pretext.equals(that.pretext) : that.pretext != null) return false;
+        if (color != null ? !color.equals(that.color) : that.color != null) return false;
+        return !(fields != null ? !fields.equals(that.fields) : that.fields != null);
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = fallback != null ? fallback.hashCode() : 0;
+        result = 31 * result + (text != null ? text.hashCode() : 0);
+        result = 31 * result + (pretext != null ? pretext.hashCode() : 0);
+        result = 31 * result + (color != null ? color.hashCode() : 0);
+        result = 31 * result + (fields != null ? fields.hashCode() : 0);
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "SlackAttachment{" +
+                "fallback='" + fallback + '\'' +
+                ", text='" + text + '\'' +
+                ", pretext='" + pretext + '\'' +
+                ", color='" + color + '\'' +
+                ", fields=" + fields +
+                '}';
+    }
 }
