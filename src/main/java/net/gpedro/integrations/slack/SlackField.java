@@ -1,11 +1,11 @@
 package net.gpedro.integrations.slack;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class SlackField {
 
@@ -71,4 +71,37 @@ public class SlackField {
         return data;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        final SlackField that = (SlackField) o;
+
+        if (shorten != that.shorten) return false;
+        if (allowMarkdown != null ? !allowMarkdown.equals(that.allowMarkdown) : that.allowMarkdown != null)
+            return false;
+        if (title != null ? !title.equals(that.title) : that.title != null) return false;
+        return !(value != null ? !value.equals(that.value) : that.value != null);
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = allowMarkdown != null ? allowMarkdown.hashCode() : 0;
+        result = 31 * result + (shorten ? 1 : 0);
+        result = 31 * result + (title != null ? title.hashCode() : 0);
+        result = 31 * result + (value != null ? value.hashCode() : 0);
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "SlackField{" +
+                "allowMarkdown=" + allowMarkdown +
+                ", shorten=" + shorten +
+                ", title='" + title + '\'' +
+                ", value='" + value + '\'' +
+                '}';
+    }
 }

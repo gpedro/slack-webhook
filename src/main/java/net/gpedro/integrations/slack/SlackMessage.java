@@ -1,10 +1,10 @@
 package net.gpedro.integrations.slack;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class SlackMessage {
 
@@ -164,4 +164,46 @@ public class SlackMessage {
         return this;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        final SlackMessage that = (SlackMessage) o;
+
+        if (unfurlMedia != that.unfurlMedia) return false;
+        if (unfurlLinks != that.unfurlLinks) return false;
+        if (attach != null ? !attach.equals(that.attach) : that.attach != null) return false;
+        if (channel != null ? !channel.equals(that.channel) : that.channel != null) return false;
+        if (icon != null ? !icon.equals(that.icon) : that.icon != null) return false;
+        if (text != null ? !text.equals(that.text) : that.text != null) return false;
+        return !(username != null ? !username.equals(that.username) : that.username != null);
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = attach != null ? attach.hashCode() : 0;
+        result = 31 * result + (channel != null ? channel.hashCode() : 0);
+        result = 31 * result + (icon != null ? icon.hashCode() : 0);
+        result = 31 * result + (text != null ? text.hashCode() : 0);
+        result = 31 * result + (username != null ? username.hashCode() : 0);
+        result = 31 * result + (unfurlMedia ? 1 : 0);
+        result = 31 * result + (unfurlLinks ? 1 : 0);
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "SlackMessage{" +
+                "attach=" + attach +
+                ", channel='" + channel + '\'' +
+                ", icon='" + icon + '\'' +
+                ", slackMessage=" + slackMessage +
+                ", text='" + text + '\'' +
+                ", username='" + username + '\'' +
+                ", unfurlMedia=" + unfurlMedia +
+                ", unfurlLinks=" + unfurlLinks +
+                '}';
+    }
 }
