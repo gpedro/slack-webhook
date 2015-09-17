@@ -1,5 +1,7 @@
 package net.gpedro.integrations.slack;
 
+import com.google.gson.JsonObject;
+
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.InputStream;
@@ -7,8 +9,6 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
-
-import com.google.gson.JsonObject;
 
 public class SlackApi {
 
@@ -18,19 +18,16 @@ public class SlackApi {
         if (service == null) {
             throw new IllegalArgumentException(
                     "Missing WebHook URL Configuration @ SlackApi");
-        } else
-            if (!service.startsWith("https://hooks.slack.com/services/")) {
-                throw new IllegalArgumentException(
-                        "Invalid Service URL. WebHook URL Format: https://hooks.slack.com/services/{id_1}/{id_2}/{token}");
-            }
+        } else if (!service.startsWith("https://hooks.slack.com/services/")) {
+            throw new IllegalArgumentException(
+                    "Invalid Service URL. WebHook URL Format: https://hooks.slack.com/services/{id_1}/{id_2}/{token}");
+        }
 
         this.service = service;
     }
 
     /**
-     * Prepare Message and Send to request
-     * 
-     * @param message
+     * Prepare Message and send to Slack
      */
     public void call(SlackMessage message) {
         if (message != null) {
@@ -38,12 +35,6 @@ public class SlackApi {
         }
     }
 
-    /**
-     * Send request to WebService
-     * 
-     * @param message
-     * @return String response
-     */
     private String send(JsonObject message) {
         URL url;
         HttpURLConnection connection = null;
@@ -71,10 +62,10 @@ public class SlackApi {
             InputStream is = connection.getInputStream();
             BufferedReader rd = new BufferedReader(new InputStreamReader(is));
             String line;
-            StringBuffer response = new StringBuffer();
+            StringBuilder response = new StringBuilder();
             while ((line = rd.readLine()) != null) {
                 response.append(line);
-                response.append('\r');
+                response.append('\n');
             }
 
             System.out.println(response.toString());
@@ -82,12 +73,10 @@ public class SlackApi {
             return response.toString();
 
         } catch (Exception e) {
-
             e.printStackTrace();
             return null;
 
         } finally {
-
             if (connection != null) {
                 connection.disconnect();
             }
