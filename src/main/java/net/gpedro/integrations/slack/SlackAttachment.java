@@ -1,10 +1,10 @@
 package net.gpedro.integrations.slack;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class SlackAttachment {
 
@@ -117,4 +117,39 @@ public class SlackAttachment {
         return data;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        SlackAttachment that = (SlackAttachment) o;
+
+        if (fallback != null ? !fallback.equals(that.fallback) : that.fallback != null) return false;
+        if (text != null ? !text.equals(that.text) : that.text != null) return false;
+        if (pretext != null ? !pretext.equals(that.pretext) : that.pretext != null) return false;
+        if (color != null ? !color.equals(that.color) : that.color != null) return false;
+        return !(fields != null ? !fields.equals(that.fields) : that.fields != null);
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = fallback != null ? fallback.hashCode() : 0;
+        result = 31 * result + (text != null ? text.hashCode() : 0);
+        result = 31 * result + (pretext != null ? pretext.hashCode() : 0);
+        result = 31 * result + (color != null ? color.hashCode() : 0);
+        result = 31 * result + (fields != null ? fields.hashCode() : 0);
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "SlackAttachment{" +
+                "fallback='" + fallback + '\'' +
+                ", text='" + text + '\'' +
+                ", pretext='" + pretext + '\'' +
+                ", color='" + color + '\'' +
+                ", fields=" + fields +
+                '}';
+    }
 }
