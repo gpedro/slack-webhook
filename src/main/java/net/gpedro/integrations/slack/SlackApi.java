@@ -12,9 +12,20 @@ import java.net.URLEncoder;
 
 public class SlackApi {
 
-    private String service;
+    private static final String POST = "POST";
+    private static final String PAYLOAD = "payload=";
+    private static final String UTF_8 = "UTF-8";
+
+    private final String service;
+    private final int timeout;
 
     public SlackApi(String service) {
+        this(service, 5000);
+    }
+
+    public SlackApi(String service,
+                    int timeout) {
+        this.timeout = timeout;
         if (service == null) {
             throw new IllegalArgumentException(
                     "Missing WebHook URL Configuration @ SlackApi");
@@ -41,14 +52,14 @@ public class SlackApi {
             // Create connection
             final URL url = new URL(this.service);
             connection = (HttpURLConnection) url.openConnection();
-            connection.setRequestMethod("POST");
-            connection.setConnectTimeout(5000);
+            connection.setRequestMethod(POST);
+            connection.setConnectTimeout(timeout);
             connection.setUseCaches(false);
             connection.setDoInput(true);
             connection.setDoOutput(true);
 
-            final String payload = "payload="
-                    + URLEncoder.encode(message.toString(), "UTF-8");
+            final String payload = PAYLOAD
+                    + URLEncoder.encode(message.toString(), UTF_8);
 
             // Send request
             final DataOutputStream wr = new DataOutputStream(
