@@ -8,6 +8,13 @@ import java.util.List;
 
 public class SlackAttachment {
 
+    private static final String HEX_REGEX = "^([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$";
+    private static final String FALLBACK = "fallback";
+    private static final String TEXT = "text";
+    private static final String PRETEXT = "pretext";
+    private static final String COLOR = "color";
+    private static final String FIELDS = "fields";
+
     private String fallback;
     private String text;
     private String pretext;
@@ -25,7 +32,7 @@ public class SlackAttachment {
     }
 
     private boolean isHex(String pair) {
-        return pair.matches("^([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$");
+        return pair.matches(HEX_REGEX);
     }
 
     private JsonArray prepareFields() {
@@ -95,23 +102,23 @@ public class SlackAttachment {
             throw new IllegalArgumentException(
                     "Missing Fallback @ SlackAttachment");
         } else {
-            data.addProperty("fallback", fallback);
+            data.addProperty(FALLBACK, fallback);
         }
 
         if (text != null) {
-            data.addProperty("text", text);
+            data.addProperty(TEXT, text);
         }
 
         if (pretext != null) {
-            data.addProperty("pretext", pretext);
+            data.addProperty(PRETEXT, pretext);
         }
 
         if (color != null) {
-            data.addProperty("color", color);
+            data.addProperty(COLOR, color);
         }
 
         if (fields != null && fields.size() > 0) {
-            data.add("fields", prepareFields());
+            data.add(FIELDS, prepareFields());
         }
 
         return data;

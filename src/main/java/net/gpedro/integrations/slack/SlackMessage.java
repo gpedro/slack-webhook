@@ -8,6 +8,15 @@ import java.util.List;
 
 public class SlackMessage {
 
+    private static final String CHANNEL = "channel";
+    private static final String USERNAME = "username";
+    private static final String HTTP = "http";
+    private static final String ICON_URL = "icon_url";
+    private static final String ICON_EMOJI = "icon_emoji";
+    private static final String UNFURL_MEDIA = "unfurl_media";
+    private static final String UNFURL_LINKS = "unfurl_links";
+    private static final String TEXT = "text";
+    private static final String ATTACHMENTS = "attachments";
     private List<SlackAttachment> attach = null;
     private String channel = null;
     private String icon = null;
@@ -58,33 +67,33 @@ public class SlackMessage {
      */
     public JsonObject prepare() {
         if (channel != null) {
-            slackMessage.addProperty("channel", channel);
+            slackMessage.addProperty(CHANNEL, channel);
         }
 
         if (username != null) {
-            slackMessage.addProperty("username", username);
+            slackMessage.addProperty(USERNAME, username);
         }
 
         if (icon != null) {
-            if (icon.contains("http")) {
-                slackMessage.addProperty("icon_url", icon);
+            if (icon.contains(HTTP)) {
+                slackMessage.addProperty(ICON_URL, icon);
             } else {
-                slackMessage.addProperty("icon_emoji", icon);
+                slackMessage.addProperty(ICON_EMOJI, icon);
             }
         }
 
-        slackMessage.addProperty("unfurl_media", unfurlMedia);
-        slackMessage.addProperty("unfurl_links", unfurlLinks);
+        slackMessage.addProperty(UNFURL_MEDIA, unfurlMedia);
+        slackMessage.addProperty(UNFURL_LINKS, unfurlLinks);
 
         if (text == null) {
             throw new IllegalArgumentException(
                     "Missing Text field @ SlackMessage");
         } else {
-            slackMessage.addProperty("text", text);
+            slackMessage.addProperty(TEXT, text);
         }
 
         if (attach != null && attach.size() > 0) {
-            slackMessage.add("attachments", this.prepareAttach());
+            slackMessage.add(ATTACHMENTS, this.prepareAttach());
         }
 
         return slackMessage;
