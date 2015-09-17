@@ -1,5 +1,7 @@
 package net.gpedro.integrations.slack;
 
+import com.google.gson.JsonObject;
+
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.InputStream;
@@ -7,8 +9,6 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
-
-import com.google.gson.JsonObject;
 
 public class SlackApi {
 
@@ -77,21 +77,14 @@ public class SlackApi {
                 response.append('\r');
             }
 
-            System.out.println(response.toString());
             rd.close();
             return response.toString();
-
         } catch (Exception e) {
-
-            e.printStackTrace();
-            return null;
-
+            throw new RuntimeException(e);
         } finally {
-
             if (connection != null) {
                 connection.disconnect();
             }
         }
     }
-
 }
