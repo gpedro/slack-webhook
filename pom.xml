@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>net.gpedro.integrations.slack</groupId>
 	<artifactId>slack-webhook</artifactId>
-	<version>1.0.4-SNAPSHOT</version>
+	<version>1.1.0</version>
 	<name>Slack Webhook integration</name>
 	<description>Slack WebHook Integration for Java</description>
 
