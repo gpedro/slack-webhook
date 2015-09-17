@@ -9,6 +9,12 @@ import com.google.gson.JsonPrimitive;
 
 public class SlackField {
 
+    private static final String TITLE = "title";
+    private static final String VALUE = "value";
+    private static final String SHORT = "short";
+    private static final String MRKDWN_IN = "mrkdwn_in";
+    private static final String FIELD_ALLOWS_MARKDOWN_REGEX = "^(pretext|text|title|fields|fallback)$";
+
     private List<String> allowMarkdown = null;
     private boolean shorten = false;
     private String title = null;
@@ -19,12 +25,11 @@ public class SlackField {
             this.allowMarkdown = new ArrayList<String>();
         }
 
-        if (field.matches("^(pretext|text|title|fields|fallback)$")) {
+        if (field.matches(FIELD_ALLOWS_MARKDOWN_REGEX)) {
             this.allowMarkdown.add(field);
         } else {
             throw new IllegalArgumentException(
-                    field
-                            + " is not allowed. Allowed: pretext, text, title, fields and fallback");
+                    field + " is not allowed. Allowed: pretext, text, title, fields and fallback");
         }
     }
 
@@ -61,11 +66,11 @@ public class SlackField {
 
     public JsonObject toJson() {
         JsonObject data = new JsonObject();
-        data.addProperty("title", title);
-        data.addProperty("value", value);
-        data.addProperty("short", shorten);
+        data.addProperty(TITLE, title);
+        data.addProperty(VALUE, value);
+        data.addProperty(SHORT, shorten);
         if (allowMarkdown != null && allowMarkdown.size() > 0) {
-            data.add("mrkdwn_in", prepareMarkdown());
+            data.add(MRKDWN_IN, prepareMarkdown());
         }
 
         return data;
