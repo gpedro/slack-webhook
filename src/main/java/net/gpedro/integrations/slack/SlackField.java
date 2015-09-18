@@ -52,20 +52,23 @@ public class SlackField {
         }
     }
 
-    public void setShorten(boolean shorten) {
+    public SlackField setShorten(boolean shorten) {
         this.shorten = shorten;
+        return this;
     }
 
-    public void setTitle(String title) {
+    public SlackField setTitle(String title) {
         this.title = title;
+        return this;
     }
 
-    public void setValue(String value) {
+    public SlackField setValue(String value) {
         this.value = value;
+        return this;
     }
 
     public JsonObject toJson() {
-        JsonObject data = new JsonObject();
+        final JsonObject data = new JsonObject();
         data.addProperty(TITLE, title);
         data.addProperty(VALUE, value);
         data.addProperty(SHORT, shorten);
