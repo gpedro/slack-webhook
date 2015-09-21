@@ -17,7 +17,8 @@ public class SlackMessage {
     private static final String UNFURL_LINKS = "unfurl_links";
     private static final String TEXT = "text";
     private static final String ATTACHMENTS = "attachments";
-    private List<SlackAttachment> attach = null;
+
+    private List<SlackAttachment> attach = new ArrayList<SlackAttachment>();
     private String channel = null;
     private String icon = null;
     private JsonObject slackMessage = new JsonObject();
@@ -52,9 +53,6 @@ public class SlackMessage {
     }
 
     public SlackMessage addAttachments(SlackAttachment attach) {
-        if (this.attach == null) {
-            this.attach = new ArrayList<SlackAttachment>();
-        }
         this.attach.add(attach);
 
         return this;
@@ -92,7 +90,7 @@ public class SlackMessage {
             slackMessage.addProperty(TEXT, text);
         }
 
-        if (attach != null && attach.size() > 0) {
+        if (!attach.isEmpty()) {
             slackMessage.add(ATTACHMENTS, this.prepareAttach());
         }
 
@@ -100,7 +98,7 @@ public class SlackMessage {
     }
 
     private JsonArray prepareAttach() {
-        JsonArray attachs = new JsonArray();
+        final JsonArray attachs = new JsonArray();
         for (SlackAttachment attach : this.attach) {
             attachs.add(attach.toJson());
         }
@@ -109,9 +107,7 @@ public class SlackMessage {
     }
 
     public SlackMessage removeAttachment(int index) {
-        if (this.attach != null) {
-            this.attach.remove(index);
-        }
+        this.attach.remove(index);
 
         return this;
     }
