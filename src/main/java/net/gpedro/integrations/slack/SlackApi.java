@@ -81,7 +81,7 @@ public class SlackApi {
             rd.close();
             return response.toString();
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            throw new SlackException(e);
         } finally {
             if (connection != null) {
                 connection.disconnect();
