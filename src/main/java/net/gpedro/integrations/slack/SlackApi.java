@@ -7,6 +7,7 @@ import java.io.DataOutputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
+import java.net.Proxy;
 import java.net.URL;
 import java.net.URLEncoder;
 
@@ -18,24 +19,43 @@ public class SlackApi {
 
     private final String service;
     private final int timeout;
+    private final Proxy proxy;
 
     public SlackApi(String service) {
         this(service, 5000);
     }
+    
+    public SlackApi(String service, Proxy proxy) {
+        this(service, 5000, proxy);
+    }
 
     public SlackApi(String service,
                     int timeout) {
-        this.timeout = timeout;
-        if (service == null) {
-            throw new IllegalArgumentException(
-                    "Missing WebHook URL Configuration @ SlackApi");
-        } else if (!service.startsWith("https://hooks.slack.com/services/")) {
-            throw new IllegalArgumentException(
-                    "Invalid Service URL. WebHook URL Format: https://hooks.slack.com/services/{id_1}/{id_2}/{token}");
-        }
-
-        this.service = service;
+        this(service, timeout, Proxy.NO_PROXY);
     }
+    
+    public SlackApi(String service,
+            int timeout, Proxy proxy) {
+		
+    	this.timeout = timeout;
+		
+		if (service == null) {
+		    throw new IllegalArgumentException(
+		            "Missing WebHook URL Configuration @ SlackApi");
+		} else if (!service.startsWith("https://hooks.slack.com/services/")) {
+		    throw new IllegalArgumentException(
+		            "Invalid Service URL. WebHook URL Format: https://hooks.slack.com/services/{id_1}/{id_2}/{token}");
+		}
+		
+		if(proxy == null) {
+			this.proxy = Proxy.NO_PROXY;
+		} else {
+			this.proxy = proxy;
+		}
+		
+		this.service = service;
+		
+	}
 
     /**
      * Prepare Message and send to Slack
@@ -51,7 +71,7 @@ public class SlackApi {
         try {
             // Create connection
             final URL url = new URL(this.service);
-            connection = (HttpURLConnection) url.openConnection();
+            connection = (HttpURLConnection) url.openConnection(proxy);
             connection.setRequestMethod(POST);
             connection.setConnectTimeout(timeout);
             connection.setUseCaches(false);
