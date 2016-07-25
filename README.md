@@ -31,7 +31,7 @@ Add the following dependency in __pom.xml__
 <dependency>
   <groupId>net.gpedro.integrations.slack</groupId>
   <artifactId>slack-webhook</artifactId>
-  <version>1.1.2</version>
+  <version>1.2.0</version>
 </dependency>
 ```
 
@@ -41,3 +41,13 @@ Add the following dependency in __pom.xml__
 2. Search for *Incoming WebHook* and click in `Add`
 3. Choose Channel to Post and press `Add Incoming WebHooks Integration`
 4. Into *Setup Instructions*, you've a WebHook URL. He is the argument [you must pass the constructor](/src/main/java/net/gpedro/integrations/slack/SlackApi.java#L18). Then, copy it.
+
+# Change Log
+* 1.2.0
+  - Added Support for Proxy
+* 1.1.2
+  - Added Support for Markdown in SlackAttachment
+* 1.1.1
+  - General Improvements
+* 1.0.0
+  - Init (:
