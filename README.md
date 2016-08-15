@@ -31,7 +31,7 @@ Add the following dependency in __pom.xml__
 <dependency>
   <groupId>net.gpedro.integrations.slack</groupId>
   <artifactId>slack-webhook</artifactId>
-  <version>1.2.0</version>
+  <version>1.2.1</version>
 </dependency>
 ```
 
