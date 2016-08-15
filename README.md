@@ -43,6 +43,8 @@ Add the following dependency in __pom.xml__
 4. Into *Setup Instructions*, you've a WebHook URL. He is the argument [you must pass the constructor](/src/main/java/net/gpedro/integrations/slack/SlackApi.java#L18). Then, copy it.
 
 # Change Log
+* 1.2.1
+  - Improved MatterMost Compatibility
 * 1.2.0
   - Added Support for Proxy
 * 1.1.2
