@@ -14,12 +14,13 @@ import com.google.gson.JsonPrimitive;
  * 
  * @author Gabriel Pedro
  * @author David Webb
- *
+ * @author Galimov Ruslan
  */
 public class SlackAttachment {
 
     private static final String HEX_REGEX = "^([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$";
     private static final String FALLBACK = "fallback";
+    private static final String CALLBACK_ID = "callback_id";
     private static final String TEXT = "text";
     private static final String PRETEXT = "pretext";
     private static final String COLOR = "color";
@@ -32,8 +33,10 @@ public class SlackAttachment {
     private static final String IMAGE_URL = "image_url";
     private static final String THUMB_URL = "thumb_url";
     private static final String MRKDWN_IN = "mrkdwn_in";
+	private static final String ACTIONS = "actions";
 
     private String fallback;
+    private String callbackId;
     private String text;
     private String pretext;
     private String color;
@@ -46,11 +49,23 @@ public class SlackAttachment {
     private String thumbUrl;
     private Set<String> markdownAttributes = new HashSet<String>();
     private List<SlackField> fields = new ArrayList<SlackField>();
+    private List<SlackAction> actions = new ArrayList<SlackAction>();
+
+    public SlackAttachment(String fallback, String callbackId) {
+        this.fallback = fallback;
+        this.callbackId = callbackId;
+    }
 
     public SlackAttachment addFields(SlackField field) {
 	this.fields.add(field);
 
 	return this;
+    }
+
+    public SlackAttachment addAction(SlackAction action) {
+        this.actions.add(action);
+
+        return this;
     }
 
     public SlackAttachment addMarkdownAttribute(String attr) {
@@ -70,6 +85,21 @@ public class SlackAttachment {
 	}
 
 	return data;
+    }
+
+    private JsonArray prepareActions() {
+        final JsonArray data = new JsonArray();
+        for (SlackAction action : actions) {
+            data.add(action.toJson());
+        }
+
+        return data;
+    }
+
+    public SlackAttachment removeAction(int index) {
+        this.actions.remove(index);
+
+        return this;
     }
 
     public SlackAttachment removeFields(int index) {
@@ -113,6 +143,12 @@ public class SlackAttachment {
 	this.fallback = fallback;
 
 	return this;
+    }
+
+    public SlackAttachment setCallbackId(String callbackId) {
+        this.callbackId = callbackId;
+
+        return this;
     }
 
     public SlackAttachment setFields(List<SlackField> fields) {
@@ -231,6 +267,16 @@ public class SlackAttachment {
 	if (fields != null && fields.size() > 0) {
 	    data.add(FIELDS, prepareFields());
 	}
+
+    if (actions != null && actions.size() > 0) {
+        data.add(ACTIONS, prepareActions());
+
+        if (callbackId == null) {
+            throw new IllegalArgumentException("Missing Callback ID @ SlackAttachment");
+        } else {
+            data.addProperty(CALLBACK_ID, callbackId);
+        }
+    }
 
 	return data;
     }

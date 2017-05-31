@@ -44,6 +44,11 @@
 			<email>ben@thesmith.co.uk</email>
 			<url>http://thesmith.co.uk</url>
 		</contributor>
+		<contributor>
+			<name>Galimov Ruslan</name>
+			<email>galimovrf@gmail.com</email>
+			<url>https://github.com/galimru/</url>
+		</contributor>
 	</contributors>
 
 	<distributionManagement>
