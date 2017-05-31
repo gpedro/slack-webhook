@@ -51,9 +51,11 @@ public class SlackAttachment {
     private List<SlackField> fields = new ArrayList<SlackField>();
     private List<SlackAction> actions = new ArrayList<SlackAction>();
 
-    public SlackAttachment(String fallback, String callbackId) {
+    public SlackAttachment() {
+    }
+
+    public SlackAttachment(String fallback) {
         this.fallback = fallback;
-        this.callbackId = callbackId;
     }
 
     public SlackAttachment addFields(SlackField field) {
