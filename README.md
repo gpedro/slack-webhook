@@ -31,7 +31,7 @@ Add the following dependency in __pom.xml__
 <dependency>
   <groupId>net.gpedro.integrations.slack</groupId>
   <artifactId>slack-webhook</artifactId>
-  <version>1.3.0</version>
+  <version>1.4.0</version>
 </dependency>
 ```
 
@@ -43,6 +43,8 @@ Add the following dependency in __pom.xml__
 4. Into *Setup Instructions*, you've a WebHook URL. He is the argument [you must pass the constructor](/src/main/java/net/gpedro/integrations/slack/SlackApi.java#L18). Then, copy it.
 
 # Change Log
+* 1.4.0
+  - Added `footer`, `footer-icon`, `ts` (#24) and `link_names` (#25) attributes
 * 1.3.0
   - Added Slack Actions (thanks @galimru)
 * 1.2.1
