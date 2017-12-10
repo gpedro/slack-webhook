@@ -23,6 +23,11 @@ api.call(new SlackMessage("#general", null, "my message"));
 SlackApi api = new SlackApi("https://hooks.slack.com/services/id_1/id_2/token");
 api.call(new SlackMessage("#general", "Mafagafo", "my message"));
 
+// Send simple message in different room with custom name and tag someone in the message so he will get notified
+SlackApi api = new SlackApi("https://hooks.slack.com/services/id_1/id_2/token");
+api.call(new SlackMessage("#general", "Mafagafo", "Hi @gpedro : your API rocks").setLinkNames(true));
+
+
 ```
 
 # Installation
