@@ -38,6 +38,10 @@ public class SlackAttachment {
 	private static final String TIMESTAMP = "ts";
 	private static final String FOOTER = "footer";
 	private static final String FOOTER_ICON = "footer_icon";
+        
+        private static final String COLOR_GOOD = "good";
+        private static final String COLOR_WARNING = "warning";
+        private static final String COLOR_DANGER = "danger";
 
 	private String fallback;
 	private String callbackId;
@@ -58,26 +62,53 @@ public class SlackAttachment {
 	private String footer = null;
 	private String footerIcon = null;
 
-	public SlackAttachment() {
+    /**
+     * Core attachment class.
+     */
+    public SlackAttachment() {
 	}
 
-	public SlackAttachment(String fallback) {
+    /**
+     * Required plain-text summary of the attachment.
+     * 
+     * A plain-text summary of the attachment. This text will be used in clients
+     * that don't show formatted text (eg. IRC, mobile notifications) and
+     * should not contain any markup.
+     * @param fallback
+     */
+    public SlackAttachment(String fallback) {
 		this.fallback = fallback;
 	}
 
-	public SlackAttachment addFields(SlackField field) {
+    /**
+     * Fields are defined as an array, and hashes contained within it will be
+     * displayed in a table inside the message attachment.
+     * @param field The Slack field
+     * @return SlackAttachment
+     */
+    public SlackAttachment addFields(SlackField field) {
 		this.fields.add(field);
 
 		return this;
 	}
 
-	public SlackAttachment addAction(SlackAction action) {
+    /**
+     * Action fields
+     * @param action The Slack action you want to add
+     * @return SlackAttachment
+     */
+    public SlackAttachment addAction(SlackAction action) {
 		this.actions.add(action);
 
 		return this;
 	}
 
-	public SlackAttachment addMarkdownAttribute(String attr) {
+    /**
+     *
+     * @param attr The markdwon attribute to add
+     * @return SlackAttachment
+     */
+    public SlackAttachment addMarkdownAttribute(String attr) {
 		this.markdownAttributes.add(attr);
 
 		return this;
@@ -105,13 +136,23 @@ public class SlackAttachment {
 		return data;
 	}
 
-	public SlackAttachment removeAction(int index) {
+    /**
+     *
+     * @param index The index of action to remove
+     * @return SlackAttachment
+     */
+    public SlackAttachment removeAction(int index) {
 		this.actions.remove(index);
 
 		return this;
 	}
 
-	public SlackAttachment removeFields(int index) {
+    /**
+     *
+     * @param index Remove fields at the given index
+     * @return SlackAttachment
+     */
+    public SlackAttachment removeFields(int index) {
 		this.fields.remove(index);
 
 		return this;
@@ -126,13 +167,39 @@ public class SlackAttachment {
 		return data;
 	}
 
-	public SlackAttachment removeMarkdownAttribute(String attr) {
+    /**
+     *
+     * @param attr The mardwon attribute to remove
+     * @return SlackAttachment
+     */
+    public SlackAttachment removeMarkdownAttribute(String attr) {
 		this.markdownAttributes.remove(attr);
 
 		return this;
 	}
 
-	public SlackAttachment setColor(String color) {
+    /**
+     *
+     * @param color The attachment color
+     * @return SlackAttachment
+     * 
+     * Like traffic signals, color-coding messages can quickly communicate
+     * intent and help separate them from the flow of other messages in the timeline.
+     * 
+     * An optional value that can either be one of :
+     * <ul>
+     * <li>good
+     * <li>warning
+     * <li>danger
+     * <li>any hex color code (eg. #439FE0)
+     * </ul>
+     * <p>
+     * This value is used to color the border along the left side of the message
+     * attachment.
+     * 
+     * @see <a href="https://api.slack.com/docs/message-attachments">https://api.slack.com/docs/message-attachments</a> for more.
+     */
+    public SlackAttachment setColor(String color) {
 		if (color != null) {
 			if (color.charAt(0) == '#') {
 				if (!isHex(color.substring(1))) {
@@ -148,103 +215,188 @@ public class SlackAttachment {
 		return this;
 	}
 
-	public SlackAttachment setFallback(String fallback) {
+    /**
+     * Set fallabck message of the attchment. Useful for terminal that have very little displays
+     * like pagers, ...
+     * @param fallback
+     * @return SlackAttachment
+     */
+    public SlackAttachment setFallback(String fallback) {
 		this.fallback = fallback;
 
 		return this;
 	}
 
-	public SlackAttachment setCallbackId(String callbackId) {
+    /**
+     *
+     * @param callbackId
+     * @return SlackAttachment
+     */
+    public SlackAttachment setCallbackId(String callbackId) {
 		this.callbackId = callbackId;
 
 		return this;
 	}
 
-	public SlackAttachment setFields(List<SlackField> fields) {
+    /**
+     * Setup fields of the slack attachment
+     * @param fields
+     * @return SlackAttachment
+     */
+    public SlackAttachment setFields(List<SlackField> fields) {
 		this.fields = fields;
 
 		return this;
 	}
 
-	public SlackAttachment setPretext(String pretext) {
+    /**
+     *
+     * @param pretext
+     * @return
+     */
+    public SlackAttachment setPretext(String pretext) {
 		this.pretext = pretext;
 
 		return this;
 	}
 
-	public SlackAttachment setText(String text) {
+    /**
+     *
+     * @param text
+     * @return
+     */
+    public SlackAttachment setText(String text) {
 		this.text = text;
 
 		return this;
 	}
 
-	public SlackAttachment setAuthorName(String authorName) {
+    /**
+     *
+     * @param authorName
+     * @return
+     */
+    public SlackAttachment setAuthorName(String authorName) {
 		this.authorName = authorName;
 
 		return this;
 	}
 
-	public SlackAttachment setAuthorLink(String authorLink) {
+    /**
+     *
+     * @param authorLink
+     * @return
+     */
+    public SlackAttachment setAuthorLink(String authorLink) {
 		this.authorLink = authorLink;
 
 		return this;
 	}
 
-	public SlackAttachment setAuthorIcon(String authorIcon) {
+    /**
+     *
+     * @param authorIcon
+     * @return
+     */
+    public SlackAttachment setAuthorIcon(String authorIcon) {
 		this.authorIcon = authorIcon;
 
 		return this;
 	}
 
-	public SlackAttachment setTitle(String title) {
+    /**
+     *
+     * @param title
+     * @return
+     */
+    public SlackAttachment setTitle(String title) {
 		this.title = title;
 
 		return this;
 	}
 
-	public SlackAttachment setTitleLink(String titleLink) {
+    /**
+     *
+     * @param titleLink
+     * @return
+     */
+    public SlackAttachment setTitleLink(String titleLink) {
 		this.titleLink = titleLink;
 
 		return this;
 	}
 
-	public SlackAttachment setImageUrl(String imageUrl) {
+    /**
+     *
+     * @param imageUrl
+     * @return
+     */
+    public SlackAttachment setImageUrl(String imageUrl) {
 		this.imageUrl = imageUrl;
 
 		return this;
 	}
 
-	public SlackAttachment setThumbUrl(String thumbUrl) {
+    /**
+     *
+     * @param thumbUrl
+     * @return
+     */
+    public SlackAttachment setThumbUrl(String thumbUrl) {
 		this.thumbUrl = thumbUrl;
 
 		return this;
 	}
 
-	public SlackAttachment setTimestamp(Long timestamp) {
+    /**
+     *
+     * @param timestamp
+     * @return
+     */
+    public SlackAttachment setTimestamp(Long timestamp) {
 		this.timestamp = timestamp;
 
 		return this;
 	}
 
-	public SlackAttachment setTimestamp(Date date) {
+    /**
+     *
+     * @param date
+     * @return
+     */
+    public SlackAttachment setTimestamp(Date date) {
 		this.timestamp = date.getTime() / 1000;
 
 		return this;
 	}
 
-	public SlackAttachment setFooter(String footer) {
+    /**
+     *
+     * @param footer
+     * @return
+     */
+    public SlackAttachment setFooter(String footer) {
 		this.footer = footer;
 
 		return this;
 	}
 
-	public SlackAttachment setFooterIcon(String footerIcon) {
+    /**
+     *
+     * @param footerIcon
+     * @return
+     */
+    public SlackAttachment setFooterIcon(String footerIcon) {
 		this.footerIcon = footerIcon;
 
 		return this;
 	}
 
-	public JsonObject toJson() {
+    /**
+     *
+     * @return
+     */
+    public JsonObject toJson() {
 		JsonObject data = new JsonObject();
 
 		if (fallback == null) {
