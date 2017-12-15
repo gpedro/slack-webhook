@@ -38,6 +38,10 @@ public class SlackAttachment {
 	private static final String TIMESTAMP = "ts";
 	private static final String FOOTER = "footer";
 	private static final String FOOTER_ICON = "footer_icon";
+        
+        private static final String COLOR_GOOD = "good";
+        private static final String COLOR_WARNING = "warning";
+        private static final String COLOR_DANGER = "danger";
 
 	private String fallback;
 	private String callbackId;
@@ -77,9 +81,10 @@ public class SlackAttachment {
 	}
 
     /**
-     *
-     * @param field
-     * @return
+     * Fields are defined as an array, and hashes contained within it will be
+     * displayed in a table inside the message attachment.
+     * @param field The Slack field
+     * @return SlackAttachment
      */
     public SlackAttachment addFields(SlackField field) {
 		this.fields.add(field);
@@ -88,9 +93,9 @@ public class SlackAttachment {
 	}
 
     /**
-     *
-     * @param action
-     * @return
+     * Action fields
+     * @param action The Slack action you want to add
+     * @return SlackAttachment
      */
     public SlackAttachment addAction(SlackAction action) {
 		this.actions.add(action);
@@ -100,8 +105,8 @@ public class SlackAttachment {
 
     /**
      *
-     * @param attr
-     * @return
+     * @param attr The markdwon attribute to add
+     * @return SlackAttachment
      */
     public SlackAttachment addMarkdownAttribute(String attr) {
 		this.markdownAttributes.add(attr);
@@ -133,8 +138,8 @@ public class SlackAttachment {
 
     /**
      *
-     * @param index
-     * @return
+     * @param index The index of action to remove
+     * @return SlackAttachment
      */
     public SlackAttachment removeAction(int index) {
 		this.actions.remove(index);
@@ -144,8 +149,8 @@ public class SlackAttachment {
 
     /**
      *
-     * @param index
-     * @return
+     * @param index Remove fields at the given index
+     * @return SlackAttachment
      */
     public SlackAttachment removeFields(int index) {
 		this.fields.remove(index);
@@ -164,8 +169,8 @@ public class SlackAttachment {
 
     /**
      *
-     * @param attr
-     * @return
+     * @param attr The mardwon attribute to remove
+     * @return SlackAttachment
      */
     public SlackAttachment removeMarkdownAttribute(String attr) {
 		this.markdownAttributes.remove(attr);
@@ -175,8 +180,24 @@ public class SlackAttachment {
 
     /**
      *
-     * @param color
-     * @return
+     * @param color The attachment color
+     * @return SlackAttachment
+     * 
+     * Like traffic signals, color-coding messages can quickly communicate
+     * intent and help separate them from the flow of other messages in the timeline.
+     * 
+     * An optional value that can either be one of :
+     * <ul>
+     * <li>good
+     * <li>warning
+     * <li>danger
+     * <li>any hex color code (eg. #439FE0)
+     * </ul>
+     * <p>
+     * This value is used to color the border along the left side of the message
+     * attachment.
+     * 
+     * @see <a href="https://api.slack.com/docs/message-attachments">https://api.slack.com/docs/message-attachments</a> for more.
      */
     public SlackAttachment setColor(String color) {
 		if (color != null) {
@@ -195,9 +216,10 @@ public class SlackAttachment {
 	}
 
     /**
-     *
+     * Set fallabck message of the attchment. Useful for terminal that have very little displays
+     * like pagers, ...
      * @param fallback
-     * @return
+     * @return SlackAttachment
      */
     public SlackAttachment setFallback(String fallback) {
 		this.fallback = fallback;
@@ -208,7 +230,7 @@ public class SlackAttachment {
     /**
      *
      * @param callbackId
-     * @return
+     * @return SlackAttachment
      */
     public SlackAttachment setCallbackId(String callbackId) {
 		this.callbackId = callbackId;
@@ -217,9 +239,9 @@ public class SlackAttachment {
 	}
 
     /**
-     *
+     * Setup fields of the slack attachment
      * @param fields
-     * @return
+     * @return SlackAttachment
      */
     public SlackAttachment setFields(List<SlackField> fields) {
 		this.fields = fields;
