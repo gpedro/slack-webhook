@@ -58,26 +58,52 @@ public class SlackAttachment {
 	private String footer = null;
 	private String footerIcon = null;
 
-	public SlackAttachment() {
+    /**
+     * Core attachment class.
+     */
+    public SlackAttachment() {
 	}
 
-	public SlackAttachment(String fallback) {
+    /**
+     * Required plain-text summary of the attachment.
+     * 
+     * A plain-text summary of the attachment. This text will be used in clients
+     * that don't show formatted text (eg. IRC, mobile notifications) and
+     * should not contain any markup.
+     * @param fallback
+     */
+    public SlackAttachment(String fallback) {
 		this.fallback = fallback;
 	}
 
-	public SlackAttachment addFields(SlackField field) {
+    /**
+     *
+     * @param field
+     * @return
+     */
+    public SlackAttachment addFields(SlackField field) {
 		this.fields.add(field);
 
 		return this;
 	}
 
-	public SlackAttachment addAction(SlackAction action) {
+    /**
+     *
+     * @param action
+     * @return
+     */
+    public SlackAttachment addAction(SlackAction action) {
 		this.actions.add(action);
 
 		return this;
 	}
 
-	public SlackAttachment addMarkdownAttribute(String attr) {
+    /**
+     *
+     * @param attr
+     * @return
+     */
+    public SlackAttachment addMarkdownAttribute(String attr) {
 		this.markdownAttributes.add(attr);
 
 		return this;
@@ -105,13 +131,23 @@ public class SlackAttachment {
 		return data;
 	}
 
-	public SlackAttachment removeAction(int index) {
+    /**
+     *
+     * @param index
+     * @return
+     */
+    public SlackAttachment removeAction(int index) {
 		this.actions.remove(index);
 
 		return this;
 	}
 
-	public SlackAttachment removeFields(int index) {
+    /**
+     *
+     * @param index
+     * @return
+     */
+    public SlackAttachment removeFields(int index) {
 		this.fields.remove(index);
 
 		return this;
@@ -126,13 +162,23 @@ public class SlackAttachment {
 		return data;
 	}
 
-	public SlackAttachment removeMarkdownAttribute(String attr) {
+    /**
+     *
+     * @param attr
+     * @return
+     */
+    public SlackAttachment removeMarkdownAttribute(String attr) {
 		this.markdownAttributes.remove(attr);
 
 		return this;
 	}
 
-	public SlackAttachment setColor(String color) {
+    /**
+     *
+     * @param color
+     * @return
+     */
+    public SlackAttachment setColor(String color) {
 		if (color != null) {
 			if (color.charAt(0) == '#') {
 				if (!isHex(color.substring(1))) {
@@ -148,103 +194,187 @@ public class SlackAttachment {
 		return this;
 	}
 
-	public SlackAttachment setFallback(String fallback) {
+    /**
+     *
+     * @param fallback
+     * @return
+     */
+    public SlackAttachment setFallback(String fallback) {
 		this.fallback = fallback;
 
 		return this;
 	}
 
-	public SlackAttachment setCallbackId(String callbackId) {
+    /**
+     *
+     * @param callbackId
+     * @return
+     */
+    public SlackAttachment setCallbackId(String callbackId) {
 		this.callbackId = callbackId;
 
 		return this;
 	}
 
-	public SlackAttachment setFields(List<SlackField> fields) {
+    /**
+     *
+     * @param fields
+     * @return
+     */
+    public SlackAttachment setFields(List<SlackField> fields) {
 		this.fields = fields;
 
 		return this;
 	}
 
-	public SlackAttachment setPretext(String pretext) {
+    /**
+     *
+     * @param pretext
+     * @return
+     */
+    public SlackAttachment setPretext(String pretext) {
 		this.pretext = pretext;
 
 		return this;
 	}
 
-	public SlackAttachment setText(String text) {
+    /**
+     *
+     * @param text
+     * @return
+     */
+    public SlackAttachment setText(String text) {
 		this.text = text;
 
 		return this;
 	}
 
-	public SlackAttachment setAuthorName(String authorName) {
+    /**
+     *
+     * @param authorName
+     * @return
+     */
+    public SlackAttachment setAuthorName(String authorName) {
 		this.authorName = authorName;
 
 		return this;
 	}
 
-	public SlackAttachment setAuthorLink(String authorLink) {
+    /**
+     *
+     * @param authorLink
+     * @return
+     */
+    public SlackAttachment setAuthorLink(String authorLink) {
 		this.authorLink = authorLink;
 
 		return this;
 	}
 
-	public SlackAttachment setAuthorIcon(String authorIcon) {
+    /**
+     *
+     * @param authorIcon
+     * @return
+     */
+    public SlackAttachment setAuthorIcon(String authorIcon) {
 		this.authorIcon = authorIcon;
 
 		return this;
 	}
 
-	public SlackAttachment setTitle(String title) {
+    /**
+     *
+     * @param title
+     * @return
+     */
+    public SlackAttachment setTitle(String title) {
 		this.title = title;
 
 		return this;
 	}
 
-	public SlackAttachment setTitleLink(String titleLink) {
+    /**
+     *
+     * @param titleLink
+     * @return
+     */
+    public SlackAttachment setTitleLink(String titleLink) {
 		this.titleLink = titleLink;
 
 		return this;
 	}
 
-	public SlackAttachment setImageUrl(String imageUrl) {
+    /**
+     *
+     * @param imageUrl
+     * @return
+     */
+    public SlackAttachment setImageUrl(String imageUrl) {
 		this.imageUrl = imageUrl;
 
 		return this;
 	}
 
-	public SlackAttachment setThumbUrl(String thumbUrl) {
+    /**
+     *
+     * @param thumbUrl
+     * @return
+     */
+    public SlackAttachment setThumbUrl(String thumbUrl) {
 		this.thumbUrl = thumbUrl;
 
 		return this;
 	}
 
-	public SlackAttachment setTimestamp(Long timestamp) {
+    /**
+     *
+     * @param timestamp
+     * @return
+     */
+    public SlackAttachment setTimestamp(Long timestamp) {
 		this.timestamp = timestamp;
 
 		return this;
 	}
 
-	public SlackAttachment setTimestamp(Date date) {
+    /**
+     *
+     * @param date
+     * @return
+     */
+    public SlackAttachment setTimestamp(Date date) {
 		this.timestamp = date.getTime() / 1000;
 
 		return this;
 	}
 
-	public SlackAttachment setFooter(String footer) {
+    /**
+     *
+     * @param footer
+     * @return
+     */
+    public SlackAttachment setFooter(String footer) {
 		this.footer = footer;
 
 		return this;
 	}
 
-	public SlackAttachment setFooterIcon(String footerIcon) {
+    /**
+     *
+     * @param footerIcon
+     * @return
+     */
+    public SlackAttachment setFooterIcon(String footerIcon) {
 		this.footerIcon = footerIcon;
 
 		return this;
 	}
 
-	public JsonObject toJson() {
+    /**
+     *
+     * @return
+     */
+    public JsonObject toJson() {
 		JsonObject data = new JsonObject();
 
 		if (fallback == null) {

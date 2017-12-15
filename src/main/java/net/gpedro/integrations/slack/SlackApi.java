@@ -53,6 +53,7 @@ public class SlackApi {
 
 	/**
 	 * Prepare Message and send to Slack
+         * @param The message to be sent
 	 */
 	public void call(SlackMessage message) {
 		if (message != null) {
