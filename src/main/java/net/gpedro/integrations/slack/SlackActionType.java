@@ -4,17 +4,16 @@ package net.gpedro.integrations.slack;
  * @author Galimov Ruslan
  */
 public enum SlackActionType {
-    BUTTON("button"),
-    SELECT("select");
+	BUTTON("button"), SELECT("select");
 
-    private String code;
+	private String code;
 
-    SlackActionType(String code) {
-        this.code = code;
-    }
+	SlackActionType(String code) {
+		this.code = code;
+	}
 
-    public String getCode() {
-        return code;
-    }
+	public String getCode() {
+		return code;
+	}
 
 }
