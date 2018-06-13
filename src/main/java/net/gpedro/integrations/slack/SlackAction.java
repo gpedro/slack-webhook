@@ -4,6 +4,7 @@ import com.google.gson.JsonObject;
 
 /**
  * @author Galimov Ruslan
+ * @author Desmond Vehar
  */
 public class SlackAction {
 
@@ -11,13 +12,7 @@ public class SlackAction {
 	private static final String TEXT = "text";
 	private static final String TYPE = "type";
 	private static final String VALUE = "value";
-	private static final String CONFIRM = "confirm";
 	private static final String STYLE = "style";
-	private static final String OPTIONS = "options";
-	private static final String OPTION_GROUPS = "option_groups";
-	private static final String DATA_SOURCE = "data_source";
-	private static final String SELECTED_OPTIONS = "selected_options";
-	private static final String MIN_QUERY_LENGTH = "min_query_length";
 
 	private String name;
 	private String text;
