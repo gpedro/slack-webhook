@@ -5,7 +5,7 @@ import com.google.gson.JsonObject;
 /**
  * @author Desmond Vehar
  */
-public class BasicButtonSlackAction extends SlackAction {
+public class BasicButtonSlackAction extends ButtonSlackAction {
 
 	private static final String URL = "url";
 
