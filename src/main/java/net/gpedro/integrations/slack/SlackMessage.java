@@ -5,7 +5,11 @@ import java.util.List;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import lombok.Data;
+import lombok.experimental.Accessors;
 
+@Data
+@Accessors(chain = true)
 public class SlackMessage {
 
 	private static final String CHANNEL = "channel";
@@ -115,12 +119,6 @@ public class SlackMessage {
 		return this;
 	}
 
-	public SlackMessage setAttachments(List<SlackAttachment> attach) {
-		this.attach = attach;
-
-		return this;
-	}
-
 	public SlackMessage setChannel(String channel) {
 		if (channel != null) {
 			this.channel = channel;
@@ -158,71 +156,5 @@ public class SlackMessage {
 		}
 
 		return this;
-	}
-
-	public SlackMessage setUnfurlMedia(boolean unfurlMedia) {
-		this.unfurlMedia = unfurlMedia;
-
-		return this;
-	}
-
-	public SlackMessage setUnfurlLinks(boolean unfurlLinks) {
-		this.unfurlLinks = unfurlLinks;
-
-		return this;
-	}
-
-	public SlackMessage setLinkNames(boolean linkNames) {
-		this.linkNames = linkNames;
-
-		return this;
-	}
-
-	@Override
-	public boolean equals(Object o) {
-		if (this == o)
-			return true;
-		if (o == null || getClass() != o.getClass())
-			return false;
-
-		final SlackMessage that = (SlackMessage) o;
-
-		if (unfurlMedia != that.unfurlMedia)
-			return false;
-		if (unfurlLinks != that.unfurlLinks)
-			return false;
-		if (linkNames != that.linkNames)
-			return false;
-		if (attach != null ? !attach.equals(that.attach) : that.attach != null)
-			return false;
-		if (channel != null ? !channel.equals(that.channel) : that.channel != null)
-			return false;
-		if (icon != null ? !icon.equals(that.icon) : that.icon != null)
-			return false;
-		if (text != null ? !text.equals(that.text) : that.text != null)
-			return false;
-
-		return !(username != null ? !username.equals(that.username) : that.username != null);
-
-	}
-
-	@Override
-	public int hashCode() {
-		int result = attach != null ? attach.hashCode() : 0;
-		result = 31 * result + (channel != null ? channel.hashCode() : 0);
-		result = 31 * result + (icon != null ? icon.hashCode() : 0);
-		result = 31 * result + (text != null ? text.hashCode() : 0);
-		result = 31 * result + (username != null ? username.hashCode() : 0);
-		result = 31 * result + (unfurlMedia ? 1 : 0);
-		result = 31 * result + (unfurlLinks ? 1 : 0);
-		result = 31 * result + (linkNames ? 1 : 0);
-		return result;
-	}
-
-	@Override
-	public String toString() {
-		return "SlackMessage{" + "attach=" + attach + ", channel='" + channel + '\'' + ", icon='" + icon + '\''
-				+ ", slackMessage=" + slackMessage + ", text='" + text + '\'' + ", username='" + username + '\''
-				+ ", unfurlMedia=" + unfurlMedia + ", unfurlLinks=" + unfurlLinks + ", linkNames=" + linkNames + '}';
 	}
 }
