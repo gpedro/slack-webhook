@@ -9,6 +9,8 @@ import java.util.Set;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
+import lombok.Data;
+import lombok.experimental.Accessors;
 
 /**
  * Represents an attachment in a slack webhook JSON message.
@@ -17,6 +19,8 @@ import com.google.gson.JsonPrimitive;
  * @author David Webb
  * @author Galimov Ruslan
  */
+@Data
+@Accessors(chain = true)
 public class SlackAttachment {
 
 	private static final String HEX_REGEX = "^([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$";
@@ -144,102 +148,6 @@ public class SlackAttachment {
 		}
 
 		this.color = color;
-
-		return this;
-	}
-
-	public SlackAttachment setFallback(String fallback) {
-		this.fallback = fallback;
-
-		return this;
-	}
-
-	public SlackAttachment setCallbackId(String callbackId) {
-		this.callbackId = callbackId;
-
-		return this;
-	}
-
-	public SlackAttachment setFields(List<SlackField> fields) {
-		this.fields = fields;
-
-		return this;
-	}
-
-	public SlackAttachment setPretext(String pretext) {
-		this.pretext = pretext;
-
-		return this;
-	}
-
-	public SlackAttachment setText(String text) {
-		this.text = text;
-
-		return this;
-	}
-
-	public SlackAttachment setAuthorName(String authorName) {
-		this.authorName = authorName;
-
-		return this;
-	}
-
-	public SlackAttachment setAuthorLink(String authorLink) {
-		this.authorLink = authorLink;
-
-		return this;
-	}
-
-	public SlackAttachment setAuthorIcon(String authorIcon) {
-		this.authorIcon = authorIcon;
-
-		return this;
-	}
-
-	public SlackAttachment setTitle(String title) {
-		this.title = title;
-
-		return this;
-	}
-
-	public SlackAttachment setTitleLink(String titleLink) {
-		this.titleLink = titleLink;
-
-		return this;
-	}
-
-	public SlackAttachment setImageUrl(String imageUrl) {
-		this.imageUrl = imageUrl;
-
-		return this;
-	}
-
-	public SlackAttachment setThumbUrl(String thumbUrl) {
-		this.thumbUrl = thumbUrl;
-
-		return this;
-	}
-
-	public SlackAttachment setTimestamp(Long timestamp) {
-		this.timestamp = timestamp;
-
-		return this;
-	}
-
-	public SlackAttachment setTimestamp(Date date) {
-		this.timestamp = date.getTime() / 1000;
-
-		return this;
-	}
-
-	public SlackAttachment setFooter(String footer) {
-		this.footer = footer;
-
-		return this;
-	}
-
-	public SlackAttachment setFooterIcon(String footerIcon) {
-		this.footerIcon = footerIcon;
 
 		return this;
 	}

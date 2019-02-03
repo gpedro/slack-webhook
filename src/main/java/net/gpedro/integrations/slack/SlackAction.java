@@ -1,10 +1,14 @@
 package net.gpedro.integrations.slack;
 
 import com.google.gson.JsonObject;
+import lombok.Data;
+import lombok.experimental.Accessors;
 
 /**
  * @author Galimov Ruslan
  */
+@Data
+@Accessors(chain = true)
 public class SlackAction {
 
 	private static final String NAME = "name";
@@ -30,46 +34,6 @@ public class SlackAction {
 		this.text = text;
 		this.type = type;
 		this.value = value;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getText() {
-		return text;
-	}
-
-	public void setText(String text) {
-		this.text = text;
-	}
-
-	public SlackActionType getType() {
-		return type;
-	}
-
-	public void setType(SlackActionType type) {
-		this.type = type;
-	}
-
-	public String getValue() {
-		return value;
-	}
-
-	public void setValue(String value) {
-		this.value = value;
-	}
-
-	public SlackActionStyle getStyle() {
-		return style;
-	}
-
-	public void setStyle(SlackActionStyle style) {
-		this.style = style;
 	}
 
 	public JsonObject toJson() {
