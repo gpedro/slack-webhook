@@ -29,7 +29,7 @@ public abstract class ButtonSlackAction extends SlackAction {
 		return data;
 	}
 
-	enum Style {
+	public enum Style {
 		DEFAULT("default"), PRIMARY("primary"), DANGER("danger");
 
 		private String code;
