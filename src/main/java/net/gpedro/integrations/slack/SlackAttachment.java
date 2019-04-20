@@ -9,6 +9,7 @@ import java.util.Set;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
+import net.gpedro.integrations.slack.attachment.action.SlackAction;
 
 /**
  * Represents an attachment in a slack webhook JSON message.
